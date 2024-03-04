@@ -1,6 +1,6 @@
 %\documentclass[varwidth=true, border=5pt, convert={size=640x}]{standalone}
 \documentclass{beamer}
-\usepackage[scale=1.25,size=custom,width=91.4,height=121.9,orientation=portrait]{beamerposter}
+\usepackage[scale=1.5,size=a0,orientation=portrait]{beamerposter}
 \geometry{margin=10mm}
 \usepackage{tikz}
 \usetikzlibrary{positioning,shapes,arrows,backgrounds,calc,fit,trees,arrows.meta,external}
@@ -99,30 +99,13 @@
     \setbeamercolor{banner}{fg=white,bg=kgrey}
     \begin{beamercolorbox}[wd=\textwidth,sep=1em]{banner}
         \bf
-        \begin{center}
-            {\includegraphics[width=0.55\paperwidth]{figures/koopmans_white_on_transparent.png}}
+        \centering
+        \huge
+        \emph{Black-box, accurate, and efficient prediction of band \\ structures with Koopmans functionals}
 
-            % \vspace{-11em}
-            % \hbox{\hspace{0.77\textwidth}
-            %     \begin{tcolorbox}[enhanced jigsaw, width=16cm, opacityback=0, colframe=seaborn_red, coltext=seaborn_red, left=10pt, bottom=10pt, top=10pt, right=10pt, tikz={rotate=30,transform shape}, boxrule=5mm]
-            %         \begin{center}
-            %             % \includegraphics[height=1cm]{./figures/qe_logo_high_res_cropped.jpg}
-            %             % \bf \huge\ \raisebox{0.3cm}{+}\,
-            %             % \includegraphics[height=1cm]{./figures/python_logo.png}
-
-            %             \bf \Huge OUT NOW!
-            %         \end{center}
-            %     \end{tcolorbox}
-            % }
-
-            \vspace{-1em}
-            \LARGE
-            \emph{an open-source package for accurately predicting spectral properties}
-
-            \vspace{1em}
-            \large
-            Edward Linscott,\textsuperscript{1,2} Riccardo De Gennaro,\textsuperscript{1,2} Nicola Colonna,\textsuperscript{2,3} and Nicola Marzari\textsuperscript{1,2,4}
-        \end{center}
+        \vspace{0.5em}
+        \large
+        Edward Linscott (Laboratory for Materials Simulations)
     \end{beamercolorbox}
 
     \vspace{-0.001\paperheight}
@@ -193,14 +176,14 @@
                             \vspace{-1em}
                             \begin{center}
                                 \hbox{
-                                    \includegraphics[width=0.5\textwidth,valign=t]{figures/nguyen2018_bandgaps.png}
+                                    \includegraphics[width=0.5\textwidth,valign=t]{../figures/nguyen2018_bandgaps.png}
                                     \hspace{1ex}
-                                    \includegraphics[width=0.45\textwidth,valign=t]{figures/ZnO_ki_trimmed.png}
+                                    \includegraphics[width=0.45\textwidth,valign=t]{../figures/ZnO_ki_trimmed.png}
                                 }
 
                                 \vspace{1ex}
 
-                                \includegraphics[width=0.9\columnwidth]{figures/colonna_2019_gw100_ip.jpeg}
+                                \includegraphics[width=0.9\columnwidth]{../figures/colonna_2019_gw100_ip.jpeg}
                             \end{center}
                         \end{minipage}
 
@@ -214,28 +197,28 @@
 
         \end{columns}
 
-        \vspace{1em}
-        \begin{columns}
-            \begin{column}{0.968\textwidth}
-                \begin{block}{3. Workflows}
-                    \vspace{1ex}
-                    \begin{center}
-                        \begin{minipage}{0.85\textwidth}
-                            Supercell implementation
+        % \vspace{1em}
+        % \begin{columns}
+        %     \begin{column}{0.968\textwidth}
+        %         \begin{block}{3. Workflows}
+        %             \vspace{1ex}
+        %             \begin{center}
+        %                 \begin{minipage}{0.85\textwidth}
+        %                     Supercell implementation
 
-                            \vspace{-3ex}
-                            \input{supercell_workflow_2.tex}
+        %                     \vspace{-3ex}
+        %                     \input{supercell_workflow_2.tex}
 
-                            \vspace{-2ex}
-                            \noindent Primitive cell implementation
+        %                     \vspace{-2ex}
+        %                     \noindent Primitive cell implementation
 
-                            \vspace{0.5ex}
-                            \input{primitive_workflow.tex}
-                        \end{minipage}
-                    \end{center}
-                \end{block}
-            \end{column}
-        \end{columns}
+        %                     \vspace{0.5ex}
+        %                     \input{primitive_workflow.tex}
+        %                 \end{minipage}
+        %             \end{center}
+        %         \end{block}
+        %     \end{column}
+        % \end{columns}
 
         \vspace{1.2em}
         \begin{columns}[t]
@@ -272,7 +255,7 @@
 
                 \vspace{1em}
                 \setbeamercolor{block title}{bg=kgrey, fg=white}
-                \begin{block}{References, acknowledgements, and affiliations}
+                \begin{block}{References and Acknowledgements}
                     \vspace{0.4em}
                     \hspace{-2em}
                     \begin{minipage}{1.03\textwidth}
@@ -286,26 +269,12 @@
                     Foundation (SNSF) through its National Centre of Competence in Research (NCCR) MARVEL and Grant No.
                     200021-179138. The National Centres of Competence in Research (NCCRs) are a funding scheme of the Swiss National Science Foundation
 
-                    \vspace{1em}
-                    \hspace{-2em}
-                    \begin{minipage}{\textwidth}
-                        \setbeamercolor{enumerate item}{fg=kgrey}
-                        \begin{enumerate}
-                            \item Theory and Simulation of Materials (THEOS), \'Ecole Polytechnique F\'ed\'erale de Lausanne, 1015 Lausanne, Switzerland
-                            \item National Centre for Computational Design and Discovery of Novel Materials (MARVEL), \'Ecole Polytechnique F\'ed\'erale de Lausanne, 1015 Lausanne, Switzerland
-                            \item Laboratory for Neutron Scattering and Imaging, Paul Scherrer Institute, 5232 Villigen, Switzerland
-                            \item Laboratory for Materials Simulations, Paul Scherrer Institut, 5232 Villigen, Switzerland
-                        \end{enumerate}
-                    \end{minipage}
-
                     \vspace{0.8em}
-                    \includegraphics[height=0.07\columnwidth]{/home/elinscott/Pictures/epfl_logos/red_cropped.eps}
+                    \includegraphics[height=0.07\columnwidth]{../figures/psi_trimmed.png}
                     \hfill
-                    \includegraphics[height=0.07\columnwidth]{figures/psi_trimmed.png}
+                    \includegraphics[height=0.07\columnwidth]{../figures/marvel_trimmed.png}
                     \hfill
-                    \includegraphics[height=0.07\columnwidth]{figures/marvel_trimmed.png}
-                    \hfill
-                    \includegraphics[height=0.07\columnwidth]{/home/elinscott/Pictures/snsf_logos/SNF_logo_standard_print_color_pos_e.eps}
+                    \includegraphics[height=0.07\columnwidth]{../figures/SNF_logo_standard_print_color_pos_e.eps}
                     \vspace{0.5em}
 
                 \end{block}
