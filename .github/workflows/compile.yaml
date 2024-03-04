@@ -1,0 +1,27 @@
+name: Compile PDFs
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Compile poster
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: poster.tex
+          working_directory: poster
+          latexmk_shell_escape: true
+      - name: Compile slide
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: slide.tex
+          working_directory: slide
+          latexmk_shell_escape: true
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDFs
+          path: |
+             poster/poster.pdf
+             slide/slides.pdf
