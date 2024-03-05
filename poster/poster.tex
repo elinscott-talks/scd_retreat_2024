@@ -68,7 +68,7 @@
 \renewcommand{\ttdefault}{pcr}
 
 \usepackage{minted}
-\usemintedstyle{friendly}
+% \usemintedstyle{friendly}
 % \usemintedstyle{gruvbox}
 % \definecolor{gruvbox_dark_bg}{HTML}{282828}
 % \definecolor{gruvbox_fg}{HTML}{ebdbb2}
@@ -81,7 +81,7 @@
             sorting=none, giveninits=true, isbn=false, doi=false, url=false]{biblatex}
 \input{ref_settings}
 \input{journal_abbreviations}
-\addbibresource{/home/elinscott/code/koopmans/docs/refs.bib}
+\addbibresource{refs.bib}
 \setbeamercolor*{bibliography entry author}{fg=kgrey}
 \setbeamercolor*{bibliography entry title}{fg=kgrey}
 \setbeamercolor*{bibliography entry note}{fg=kgrey}
@@ -101,7 +101,7 @@
         \bf
         \centering
         \huge
-        \emph{Black-box, accurate, and efficient prediction of band \\ structures with Koopmans functionals}
+        \emph{Predicting band structures accurately and efficiently with black-box calculations}
 
         \vspace{0.5em}
         \large
@@ -110,17 +110,92 @@
 
     \vspace{-0.001\paperheight}
     \setbeamercolor{background}{fg=white,bg=seaborn_bg_grey}
-    \begin{beamercolorbox}[ht=0.776\paperheight,wd=\textwidth]{background}
+    \begin{beamercolorbox}[ht=0.85\paperheight,wd=\textwidth]{background}
 
         \begin{columns}[t]
             \begin{column}{0.37\linewidth}
                 \begin{block}{Summary}
-                    \textbf{\texttt{koopmans} has just been released!} This package contains everything you need to run a Koopmans functional calculation without expert knowledge, including implementations of Koopmans functionals in \textsc{Quantum ESPRESSO} as well as automated workflows.
+                    Koopmans functionals are capable of accurately and efficiently predicting the band structures of materials. We are now working on making these calculations function as a black-box. This will allow Koopmans functionals to be used in a much wider range of contexts e.g. as a tool for experimentalists; as a step within high-throughput workflows.
                 \end{block}
 
                 \vspace{1.8ex}
 
-                \begin{block}{1. What are Koopmans functionals?}
+                \begin{block}{1. Predicting band structures}
+                    % A tikzfigure with the following elements:
+                    %  - a DFT band structure on the left
+                    %  - a Koopmans band structure on the right
+                    %  - a curved arrow between the two band structures labelled "impose generalised piecewise linearity"
+
+
+                    % define the color #01796f
+                    \definecolor{exp_green}{HTML}{01796f}
+
+                    \begin{tikzpicture}
+                        \node[inner sep=0pt] (dft) at (0,0)
+                        {\includegraphics[width=0.35\textwidth]{../figures/ZnO_lda.png}};
+                        \node[font=\tiny,color=exp_green] (exp label) at (2.5,2) {exp.};
+                        \node[above,align=center,font=\small] at (dft.north) {DFT systematically\\underestimates\\the band gap};
+                        \node[inner sep=0pt] (koopmans) at (20,0)
+                        {\includegraphics[width=0.35\textwidth]{../figures/ZnO_ki.png}};
+                        \node[above,align=center,font=\small] at (koopmans.north) {Koopmans\\accurately predicts\\the band gap};
+                        \node[align=center, font=\scriptsize] (midpoint) at (10,3) { generalised\\piecewise linearity};
+                        \draw[shorten <= 0.5cm, line width=0.25cm] ([yshift=-1cm] dft.east) to[out=45, in=180] (midpoint.south);
+                        \draw[shorten >= 0.5cm, line width=0.25cm, -{Latex[round,width=1cm,length=1.5cm]}] (midpoint.south) to[out=0, in=135] ([yshift=-1cm] koopmans.west);
+                    \end{tikzpicture}
+
+                    More generally, Koopmans functionals give accurate charged excitation energies for...
+                    \setlength{\tabcolsep}{5pt}
+                    \renewcommand{\arraystretch}{1}
+                    \vspace{0.7em}
+
+                    \hbox{
+                    \begin{minipage}{0.5\columnwidth}
+                    \includegraphics[width=\columnwidth,valign=t]{../figures/nguyen2018_bandgaps.png}
+
+                    \scriptsize
+                    \begin{tabular}{c c S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2]}
+                                                          &             & {PBE} & {G\textsubscript{0}W\textsubscript{0}} & {KI} & {KIPZ} & {QSG$\tilde{\mathrm{W}}$} \\
+                        \midrule
+                        \midrule
+                        \multirow{2}{*}{$E_\mathrm{gap}$} &
+                        {MAE (eV)}                        & 2.54        & 0.56  & 0.27                                   & 0.22 & 0.18                               \\
+                                                          & {MAPE (\%)} & 48.28 & 12.10                                  & 7.09 & 5.37   & 4.46                      \\
+                        \midrule
+                        \multirow{2}{*}{IP}               &
+                        {MAE (eV)}                        & 1.09        & 0.39  & 0.19                                   & 0.21 & 0.49                               \\
+                                                          & {MAPE (\%)} & 15.58 & 5.71                                   & 2.99 & 3.14   & 7.41
+                    \end{tabular}
+                        
+                    \end{minipage}
+                    \hspace{0.05\columnwidth}
+                    \begin{minipage}{0.4\columnwidth}
+                        \raggedright
+                    \textbf{Semiconductors and insulators} Band gap and ionisation potential of semiconductors and insulators compared to experiment
+                    
+                    \textcolor{kgrey_light}{\citeauthoryear{Nguyen2018}}
+                    \end{minipage}
+                    }
+
+                    \vspace{1em}
+                    \normalsize
+
+                    \textbf{Molecules} The KI, pKIPZ, and KIPZ Koopmans functionals give ionization potentials comparable to state-of-the-art GW across the GW100 dataset
+                    
+                    \textcolor{kgrey_light}{\citeauthoryear{Colonna2019}}
+
+                    \vspace{0.5em}
+
+                    \includegraphics[width=0.9\columnwidth]{../figures/colonna_2019_gw100_ip.jpeg}
+
+                    \vspace{0.15em}
+
+                \end{block}
+
+            \end{column}
+
+            \begin{column}{0.57\linewidth}
+
+                \begin{block}{2. How do Koopmans functionals work?}
                     \nocite{Dabo2009,Dabo2010,Borghi2014,Colonna2018,Nguyen2018,Colonna2019,DeGennaro2022,Colonna2022}
                     Koopmans functionals are a class of functionals that aim to reproduce spectral properties (charged excitations) and total energies on the same footing, enforcing a generalised piecewise linearity condition.
                     \vspace{0.125em}
@@ -134,64 +209,6 @@
                     \vspace{0.34em}
                 \end{block}
 
-            \end{column}
-
-            \begin{column}{0.57\linewidth}
-
-                \begin{block}{2. Example results}
-                    \setlength{\tabcolsep}{5pt}
-                    \renewcommand{\arraystretch}{1}
-                    \vspace{0.7em}
-                    \hbox{
-
-                        \begin{minipage}[b][0.25\textwidth][t]{0.4\textwidth}
-                            \textbf{Semiconductors and insulators} (top left) Band gap and ionisation potential of semiconductors and insulators compared to experiment \textcolor{kgrey_light}{\citeauthoryear{Nguyen2018}}
-
-                            \small
-                            \begin{tabular}{c c S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2]}
-                                                                  &             & {PBE} & {G\textsubscript{0}W\textsubscript{0}} & {KI} & {KIPZ} & {QSG$\tilde{\mathrm{W}}$} \\
-                                \midrule
-                                \midrule
-                                \multirow{2}{*}{$E_\mathrm{gap}$} &
-                                {MAE (eV)}                        & 2.54        & 0.56  & 0.27                                   & 0.22 & 0.18                               \\
-                                                                  & {MAPE (\%)} & 48.28 & 12.10                                  & 7.09 & 5.37   & 4.46                      \\
-                                \midrule
-                                \multirow{2}{*}{IP}               &
-                                {MAE (eV)}                        & 1.09        & 0.39  & 0.19                                   & 0.21 & 0.49                               \\
-                                                                  & {MAPE (\%)} & 15.58 & 5.71                                   & 2.99 & 3.14   & 7.41
-                            \end{tabular}
-
-                            \vspace{1em}
-                            \normalsize
-                            (top right) The KI band structure of ZnO compared to the experimental band gap and $d$-band position \textcolor{kgrey_light}{\citeauthoryear{Colonna2022}}
-
-                            \vspace{0.7em}
-                            \textbf{Molecules} (bottom) The KI, pKIPZ, and KIPZ Koopmans functionals give ionization potentials comparable to qpGW across the GW100 dataset \textcolor{kgrey_light}{\citeauthoryear{Colonna2019}}
-
-                        \end{minipage}
-
-                        \hspace{0.5em}
-
-                        \begin{minipage}{0.55\textwidth}
-                            \vspace{-1em}
-                            \begin{center}
-                                \hbox{
-                                    \includegraphics[width=0.5\textwidth,valign=t]{../figures/nguyen2018_bandgaps.png}
-                                    \hspace{1ex}
-                                    \includegraphics[width=0.45\textwidth,valign=t]{../figures/ZnO_ki_trimmed.png}
-                                }
-
-                                \vspace{1ex}
-
-                                \includegraphics[width=0.9\columnwidth]{../figures/colonna_2019_gw100_ip.jpeg}
-                            \end{center}
-                        \end{minipage}
-
-                    }
-                    \hfill
-                    \vspace{0.15em}
-
-                \end{block}
 
             \end{column}
 
@@ -225,21 +242,21 @@
             \begin{column}{0.47\textwidth}
                 \begin{block}{4. What does running \texttt{koopmans} look like?}
 
-                    \hbox{
-                        \begin{minipage}[t]{0.44\columnwidth}
-                            Koopmans takes a single \texttt{JSON} file as input e.g. for bulk silicon
-                            \vspace{0.2em}
-                            \inputminted[fontsize=\tiny, autogobble, breaklines]{json}{scripts/si_ki.json}
-                        \end{minipage}
-                        \hspace{0.025\columnwidth}
-                        \begin{minipage}[t]{0.5\columnwidth}
-                            Running from the command line looks like this:
-                            \vspace{0.2em}
-                            \inputminted[fontsize=\tiny, autogobble, breaklines]{shell-session}{scripts/si_ki.out}
-                        \end{minipage}
-                    }
-                    \hfill
-                    \vspace{0.86em}
+                    % \hbox{
+                    %     \begin{minipage}[t]{0.44\columnwidth}
+                    %         Koopmans takes a single \texttt{JSON} file as input e.g. for bulk silicon
+                    %         \vspace{0.2em}
+                    %         \inputminted[fontsize=\tiny, autogobble, breaklines]{json}{scripts/si_ki.json}
+                    %     \end{minipage}
+                    %     \hspace{0.025\columnwidth}
+                    %     \begin{minipage}[t]{0.5\columnwidth}
+                    %         Running from the command line looks like this:
+                    %         \vspace{0.2em}
+                    %         % \inputminted[fontsize=\tiny, autogobble, breaklines]{shell-session}{scripts/si_ki.out}
+                    %     \end{minipage}
+                    % }
+                    % \hfill
+                    % \vspace{0.86em}
 
                 \end{block}
 
