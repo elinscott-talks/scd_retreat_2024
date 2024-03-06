@@ -93,16 +93,18 @@
 
 @article{Colonna2022,
   title = {Koopmans {{Spectral Functionals}} in {{Periodic Boundary Conditions}}},
-  author = {Colonna, Nicola and Gennaro, Riccardo De and Linscott, Edward and Marzari, Nicola},
+  author = {Colonna, Nicola and De Gennaro, Riccardo and Linscott, Edward and Marzari, Nicola},
   year = {2022},
-  month = aug,
+  month = sep,
   journal = {J. Chem. Theory Comput.},
+  volume = {18},
+  number = {9},
+  pages = {5435--5448},
   publisher = {American Chemical Society},
+  issn = {1549-9618},
   doi = {10.1021/acs.jctc.2c00161},
-  urldate = {2022-08-09},
-  abstract = {Koopmans spectral functionals aim to describe simultaneously ground-state properties and charged excitations of atoms, molecules, nanostructures, and periodic crystals. This is achieved by augmenting standard density functionals with simple but physically motivated orbital-density-dependent corrections. These corrections act on a set of localized orbitals that, in periodic systems, resemble maximally localized Wannier functions. At variance with the original, direct supercell implementation (Phys. Rev. X 2018, 8, 021051), we discuss here (i) the complex but efficient formalism required for a periodic boundary code using explicit Brillouin zone sampling and (ii) the calculation of the screened Koopmans corrections with density functional perturbation theory. In addition to delivering improved scaling with system size, the present development makes the calculation of band structures with Koopmans functionals straightforward. The implementation in the open-source Quantum ESPRESSO distribution and the application to prototypical insulating and semiconducting systems are presented and discussed.},
-  copyright = {{\copyright} 2022 American Chemical Society},
-  langid = {english}
+  urldate = {2024-03-05},
+  abstract = {Koopmans spectral functionals aim to describe simultaneously ground-state properties and charged excitations of atoms, molecules, nanostructures, and periodic crystals. This is achieved by augmenting standard density functionals with simple but physically motivated orbital-density-dependent corrections. These corrections act on a set of localized orbitals that, in periodic systems, resemble maximally localized Wannier functions. At variance with the original, direct supercell implementation (Phys. Rev. X 2018, 8, 021051), we discuss here (i) the complex but efficient formalism required for a periodic boundary code using explicit Brillouin zone sampling and (ii) the calculation of the screened Koopmans corrections with density functional perturbation theory. In addition to delivering improved scaling with system size, the present development makes the calculation of band structures with Koopmans functionals straightforward. The implementation in the open-source Quantum ESPRESSO distribution and the application to prototypical insulating and semiconducting systems are presented and discussed.}
 }
 
 @misc{Dabo2009,
@@ -254,14 +256,16 @@
   shorttitle = {Koopmans},
   author = {Linscott, Edward B. and Colonna, Nicola and De Gennaro, Riccardo and Nguyen, Ngoc Linh and Borghi, Giovanni and Ferretti, Andrea and Dabo, Ismaila and Marzari, Nicola},
   year = {2023},
-  month = aug,
+  month = oct,
   journal = {J. Chem. Theory Comput.},
+  volume = {19},
+  number = {20},
+  pages = {7097--7111},
   publisher = {American Chemical Society},
   issn = {1549-9618},
   doi = {10.1021/acs.jctc.3c00652},
-  urldate = {2023-08-24},
-  abstract = {Over the past decade we have developed Koopmans functionals, a computationally efficient approach for predicting spectral properties with an orbital-density-dependent functional framework. These functionals impose a generalized piecewise linearity condition to the entire electronic manifold, ensuring that orbital energies match the corresponding electron removal/addition energy differences (in contrast to semilocal DFT, where a mismatch between the two lies at the heart of the band gap problem and, more generally, the unreliability of Kohn--Sham orbital energies). This strategy has proven to be very powerful, yielding molecular orbital energies and solid-state band structures with comparable accuracy to many-body perturbation theory but at greatly reduced computational cost while preserving a functional formulation. This paper reviews the theory of Koopmans functionals, discusses the algorithms necessary for their implementation, and introduces koopmans, an open-source package that contains all of the code and workflows needed to perform Koopmans functional calculations and obtain reliable spectral properties of molecules and materials.},
-  copyright = {All rights reserved}
+  urldate = {2024-03-05},
+  abstract = {Over the past decade we have developed Koopmans functionals, a computationally efficient approach for predicting spectral properties with an orbital-density-dependent functional framework. These functionals impose a generalized piecewise linearity condition to the entire electronic manifold, ensuring that orbital energies match the corresponding electron removal/addition energy differences (in contrast to semilocal DFT, where a mismatch between the two lies at the heart of the band gap problem and, more generally, the unreliability of Kohn--Sham orbital energies). This strategy has proven to be very powerful, yielding molecular orbital energies and solid-state band structures with comparable accuracy to many-body perturbation theory but at greatly reduced computational cost while preserving a functional formulation. This paper reviews the theory of Koopmans functionals, discusses the algorithms necessary for their implementation, and introduces koopmans, an open-source package that contains all of the code and workflows needed to perform Koopmans functional calculations and obtain reliable spectral properties of molecules and materials.}
 }
 
 @article{Ma2016,
@@ -394,6 +398,40 @@
   keywords = {Computational methods,Electronic structure}
 }
 
+@article{Qiao2023,
+  title = {Projectability Disentanglement for Accurate and Automated Electronic-Structure {{Hamiltonians}}},
+  author = {Qiao, Junfeng and Pizzi, Giovanni and Marzari, Nicola},
+  year = {2023},
+  month = nov,
+  journal = {npj Comput Mater},
+  volume = {9},
+  pages = {208},
+  issn = {2057-3960},
+  doi = {10.1038/s41524-023-01146-w},
+  urldate = {2023-11-21},
+  abstract = {Maximally-localized Wannier functions (MLWFs) are broadly used to characterize the electronic structure of materials. Generally, one can construct MLWFs describing isolated bands (e.g. valence bands of insulators) or entangled bands (e.g. valence and conduction bands of insulators, or metals). Obtaining accurate and compact MLWFs often requires chemical intuition and trial and error, a challenging step even for experienced researchers and a roadblock for high-throughput calculations. Here, we present an automated approach, projectability-disentangled Wannier functions (PDWFs), that constructs MLWFs spanning the occupied bands and their complement for the empty states, providing a tight-binding picture of optimized atomic orbitals in crystals. Key to the algorithm is a projectability measure for each Bloch state onto atomic orbitals, determining if that state should be kept identically, discarded, or mixed into the disentanglement. We showcase the accuracy on a test set of 200 materials, and the reliability by constructing 21,737 Wannier Hamiltonians.},
+  copyright = {2023 The Author(s)},
+  langid = {english},
+  keywords = {Computational methods,Electronic structure}
+}
+
+@article{Qiao2023a,
+  title = {Automated Mixing of Maximally Localized {{Wannier}} Functions into Target Manifolds},
+  author = {Qiao, Junfeng and Pizzi, Giovanni and Marzari, Nicola},
+  year = {2023},
+  month = oct,
+  journal = {npj Comput Mater},
+  volume = {9},
+  pages = {206},
+  issn = {2057-3960},
+  doi = {10.1038/s41524-023-01147-9},
+  urldate = {2023-11-23},
+  abstract = {Maximally localized Wannier functions (MLWFs) are widely used in electronic-structure calculations. We have recently developed automated approaches to generate MLWFs that represent natural tight-binding sets of atomic-like orbitals; these describe accurately both the occupied states and the complementary unoccupied ones. For many applications, it is required to use MLWFs that describe instead certain target groups of bands: the valence or the conduction bands, or correlated manifolds. Here, we start from these tight-binding sets of MLWFs, and mix them using a combination of parallel transport and maximal localization to construct manifold-remixed Wannier functions (MRWFs): these are orthogonal sets of MLWFs that fully and only span desired target submanifolds. The algorithm is simple and robust, and is showcased here in reference applications (silicon, MoS2, and SrVO3) and in a mid-throughput study of 77 insulators.},
+  copyright = {2023 The Author(s)},
+  langid = {english},
+  keywords = {Electronic properties and materials,Electronic structure}
+}
+
 @article{Scherpelz2016,
   title = {Implementation and {{Validation}} of {{Fully Relativistic GW Calculations}}: {{Spin}}--{{Orbit Coupling}} in {{Molecules}}, {{Nanocrystals}}, and {{Solids}}},
   shorttitle = {Implementation and {{Validation}} of {{Fully Relativistic GW Calculations}}},
@@ -486,4 +524,10 @@
   publisher = {Proceedings of the National Academy of Sciences},
   doi = {10.1073/pnas.2104556118},
   urldate = {2022-03-22}
+}
+
+@misc{zotero-3342,
+  title = {Koopmans {{Spectral Functionals}} in {{Periodic Boundary Conditions}} {\textbar} {{Journal}} of {{Chemical Theory}} and {{Computation}}},
+  urldate = {2024-03-05},
+  howpublished = {https://pubs.acs.org/doi/full/10.1021/acs.jctc.2c00161}
 }

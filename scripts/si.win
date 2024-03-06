@@ -1,0 +1,3 @@
+begin projections
+  f=0.25,0.25,0.25:sp3
+end projections

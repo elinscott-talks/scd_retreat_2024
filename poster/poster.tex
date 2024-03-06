@@ -57,6 +57,7 @@
 \definecolor{kgrey}{HTML}{2b2828}
 \definecolor{kgrey_light}{HTML}{d2cfcf}
 \definecolor{kgrey_verylight}{HTML}{eeeded}
+\definecolor{grey_from_blender}{HTML}{b9b9c0}
 \setbeamercolor{block body alert}{fg=white, bg=kgrey}
 \setbeamercolor{block title}{bg=kgrey, fg=white}
 \setbeamercolor{block body}{fg=kgrey, bg=white}
@@ -96,29 +97,34 @@
 \begin{frame}[t]{}
 
     \vspace{-0.001\paperheight}
-    \setbeamercolor{banner}{fg=white,bg=kgrey}
-    \begin{beamercolorbox}[wd=\textwidth,sep=1em]{banner}
+    \setbeamercolor{banner}{fg=white,bg=grey_from_blender}
+    \hbox{%
+    \includegraphics[width=0.2\textwidth]{../figures/black_box_filled_square.png}%
+    \hspace{-0.005\textwidth}%
+    \begin{beamercolorbox}[wd=0.805\textwidth,ht=0.2\textwidth,sep=1em]{banner}
+        \vfill
         \bf
-        \centering
         \huge
         \emph{Predicting band structures accurately and efficiently with black-box calculations}
 
         \vspace{0.5em}
         \large
         Edward Linscott (Laboratory for Materials Simulations)
+        \vfill
     \end{beamercolorbox}
+    }
 
     \vspace{-0.001\paperheight}
-    \setbeamercolor{background}{fg=white,bg=seaborn_bg_grey}
-    \begin{beamercolorbox}[ht=0.85\paperheight,wd=\textwidth]{background}
+    \setbeamercolor{background}{fg=white,bg=grey_from_blender}
+    \begin{beamercolorbox}[ht=0.794\paperheight,wd=\textwidth]{background}
 
         \begin{columns}[t]
             \begin{column}{0.37\linewidth}
                 \begin{block}{Summary}
-                    Koopmans functionals are capable of accurately and efficiently predicting the band structures of materials. We are now working on making these calculations function as a black-box. This will allow Koopmans functionals to be used in a much wider range of contexts e.g. as a tool for experimentalists; as a step within high-throughput workflows.
+                    Koopmans functionals are capable of accurately and efficiently predicting the band structures of materials. We are now working on making these calculations function as a black-box. This will allow Koopmans functionals to be used in a much wider range of contexts e.g. as a tool for experimentalists, or as a step within high-throughput workflows.
                 \end{block}
 
-                \vspace{1.8ex}
+                \vspace{1.4ex}
 
                 \begin{block}{1. Predicting band structures}
                     % A tikzfigure with the following elements:
@@ -130,24 +136,25 @@
                     % define the color #01796f
                     \definecolor{exp_green}{HTML}{01796f}
 
+                    \begin{center}
                     \begin{tikzpicture}
                         \node[inner sep=0pt] (dft) at (0,0)
                         {\includegraphics[width=0.35\textwidth]{../figures/ZnO_lda.png}};
                         \node[font=\tiny,color=exp_green] (exp label) at (2.5,2) {exp.};
                         \node[above,align=center,font=\small] at (dft.north) {DFT systematically\\underestimates\\the band gap};
-                        \node[inner sep=0pt] (koopmans) at (20,0)
+                        \node[inner sep=0pt] (koopmans) at (18,0)
                         {\includegraphics[width=0.35\textwidth]{../figures/ZnO_ki.png}};
                         \node[above,align=center,font=\small] at (koopmans.north) {Koopmans\\accurately predicts\\the band gap};
-                        \node[align=center, font=\scriptsize] (midpoint) at (10,3) { generalised\\piecewise linearity};
-                        \draw[shorten <= 0.5cm, line width=0.25cm] ([yshift=-1cm] dft.east) to[out=45, in=180] (midpoint.south);
-                        \draw[shorten >= 0.5cm, line width=0.25cm, -{Latex[round,width=1cm,length=1.5cm]}] (midpoint.south) to[out=0, in=135] ([yshift=-1cm] koopmans.west);
+                        \node[align=center, font=\scriptsize] (midpoint) at (9,2) {impose generalised\\piecewise linearity};
+                        \draw[shorten <= 0.5cm, line width=0.15cm] ([yshift=-1cm] dft.east) to[out=45, in=180] (midpoint.south);
+                        \draw[shorten >= 0.5cm, line width=0.15cm, -{Latex[round,width=0.75cm,length=1cm]}] (midpoint.south) to[out=0, in=135] ([yshift=-1cm] koopmans.west);
                     \end{tikzpicture}
+                    \end{center}
 
-                    More generally, Koopmans functionals give accurate charged excitation energies for...
                     \setlength{\tabcolsep}{5pt}
                     \renewcommand{\arraystretch}{1}
-                    \vspace{0.7em}
 
+                    \vspace{1ex}
                     \hbox{
                     \begin{minipage}{0.5\columnwidth}
                     \includegraphics[width=\columnwidth,valign=t]{../figures/nguyen2018_bandgaps.png}
@@ -196,19 +203,78 @@
             \begin{column}{0.57\linewidth}
 
                 \begin{block}{2. How do Koopmans functionals work?}
-                    \nocite{Dabo2009,Dabo2010,Borghi2014,Colonna2018,Nguyen2018,Colonna2019,DeGennaro2022,Colonna2022}
-                    Koopmans functionals are a class of functionals that aim to reproduce spectral properties (charged excitations) and total energies on the same footing, enforcing a generalised piecewise linearity condition.
+                    \nocite{Dabo2009,Dabo2010,Borghi2014,Colonna2018,Nguyen2018,Colonna2019,DeGennaro2022,Colonna2022,Linscott2023}
+                    Koopmans functionals are constructed to reproduce spectral properties (charged excitations) and total energies on the same footing, enforcing a generalised piecewise linearity condition.
                     \vspace{0.125em}
                     \begin{equation*}
                         E_\mathrm{Koopmans} = E_\mathrm{DFT} + \sum_i \alpha_i \biggl( \underbrace{- \int_0^{f_i}\varepsilon_i(f) df}_{\substack{\text{removes the erroneous} \\ \text{curvature}}} \underbrace{+ f_i\int_0^1 \varepsilon_i(f) df}_{\substack{\text{restores the}\\ \text{correct linearity}}} \biggr)
                     \end{equation*}
                     \vspace{0.125em}
 
-                    The result: \textbf{band structures and orbital energies as accurate as state-of-the-art GW, at a fraction of the computational cost.}
+                    As the results on the left show, this strategy is sufficient to obtain band structures and orbital energies as accurate as state-of-the-art GW, at a fraction of the computational cost.
+
+                    \vspace{1ex}
+                    However, there's no such thing as a free lunch: compared to DFT these calculations are require a few extra steps:
+                    \begin{itemize}
+                        \item obtaining a set of localized orbitals $\rightarrow$ the focus of this work
+                        \item calculating screening parameters $\rightarrow$ implemented and automated in the \texttt{koopmans} code \textcolor{kgrey_light}{\citeauthoryear{Linscott2023}}
+                    \end{itemize}
 
                     \vspace{0.34em}
                 \end{block}
 
+                \vspace{1.5ex}
+
+            \begin{block}{3. Localized orbitals via automated Wannierization}
+                In order to automate the Wannierisation, we...
+
+                \vspace{1ex}
+                \begin{columns}
+                    \begin{column}{0.35\columnwidth}
+                \textbf{(a) use pseudoatomic orbitals as projectors}
+
+                \begin{tikzpicture}
+                    \node[font=\tt\small,align=left] (old) at (0,0) {begin projections\\\qquad f=0.25,0.25,0.25:sp3\\end projections};
+                    \draw[color=seaborn_red, line width=0.1cm] (old.south west) -- (old.north east);
+                    \draw[color=seaborn_red, line width=0.1cm] (old.north west) -- (old.south east);
+                \end{tikzpicture}
+
+                \vspace{1ex}
+                \textbf{(b) perform disentanglement based on projectability}
+
+                \begin{center}
+                \includegraphics[width=0.6\columnwidth]{../figures/proj_disentanglement_fig1a.png}
+                \end{center}
+
+                System-dependent energy disentanglement windows are no longer required
+                \textcolor{kgrey_light}{\citeauthoryear{Qiao2023}}
+                        
+                    \end{column}
+                    \begin{column}{0.5\columnwidth}
+                \textbf{(c) separate subspaces via parallel transport}
+                
+                \begin{center}
+                \includegraphics[width=0.6\columnwidth]{../figures/target_manifolds_fig1b.png}
+                \end{center}
+
+                \textcolor{kgrey_light}{\citeauthoryear{Qiao2023a}}
+                \vspace{1ex}
+
+                \textbf{(d) extend the pseudoatomic orbital basis}
+
+                \vspace{1ex}
+                \begin{center}
+                \includegraphics[width=0.6\columnwidth]{../paos/F_with_3s_cropped.png}
+                \end{center}
+
+                Requires a confining potential for higher states, which is parametrised via Bayesian optimisation
+                        
+                    \end{column}
+                \end{columns}
+
+
+
+            \end{block}
 
             \end{column}
 
@@ -237,62 +303,45 @@
         %     \end{column}
         % \end{columns}
 
-        \vspace{1.2em}
+        \vspace{1.4ex}
         \begin{columns}[t]
-            \begin{column}{0.47\textwidth}
-                \begin{block}{4. What does running \texttt{koopmans} look like?}
-
-                    % \hbox{
-                    %     \begin{minipage}[t]{0.44\columnwidth}
-                    %         Koopmans takes a single \texttt{JSON} file as input e.g. for bulk silicon
-                    %         \vspace{0.2em}
-                    %         \inputminted[fontsize=\tiny, autogobble, breaklines]{json}{scripts/si_ki.json}
-                    %     \end{minipage}
-                    %     \hspace{0.025\columnwidth}
-                    %     \begin{minipage}[t]{0.5\columnwidth}
-                    %         Running from the command line looks like this:
-                    %         \vspace{0.2em}
-                    %         % \inputminted[fontsize=\tiny, autogobble, breaklines]{shell-session}{scripts/si_ki.out}
-                    %     \end{minipage}
-                    % }
-                    % \hfill
-                    % \vspace{0.86em}
-
-                \end{block}
-
-            \end{column}
-
-            \begin{column}{0.47\textwidth}
-                \setbeamercolor{block title}{bg=white, fg=white}
-                \begin{block}{\vphantom{P}}
-                    \vspace{-2.8ex}
-                    or run with \texttt{python}:
-                    \inputminted[fontsize=\tiny, autogobble, breaklines]{python}{scripts/si.py}
-                \end{block}
-
-                \vspace{1em}
-                \setbeamercolor{block title}{bg=kgrey, fg=white}
-                \begin{block}{References and Acknowledgements}
+            \begin{column}{0.67\textwidth}
+                \begin{block}{References\vphantom{g}}
                     \vspace{0.4em}
                     \hspace{-2em}
                     \begin{minipage}{1.03\textwidth}
                         \AtNextBibliography{\tiny}
                         \printbibliography
                     \end{minipage}
+                \end{block}
 
-                    \tiny
-                    \vspace{1em}
+            \end{column}
+
+            \begin{column}{0.27\textwidth}
+                % \setbeamercolor{block title}{bg=white, fg=white}
+                % \begin{block}{\vphantom{P}}
+                %     \vspace{-2.8ex}
+                %     or run with \texttt{python}:
+                %     \inputminted[fontsize=\tiny, autogobble, breaklines]{python}{scripts/si.py}
+                % \end{block}
+
+                % \vspace{1em}
+                % \setbeamercolor{block title}{bg=kgrey, fg=white}
+                \begin{block}{Acknowledgements}
+                    \vspace{0.5em}
+                    \includegraphics[height=0.1\columnwidth]{../figures/psi_trimmed.png}
+                    \hfill
+                    \includegraphics[height=0.1\columnwidth]{../figures/marvel_trimmed.png}
+                    \hfill
+                    \includegraphics[height=0.1\columnwidth]{../figures/SNF_logo_standard_print_color_pos_e.eps}
+                    \vspace{0.5em}
+
+                    \footnotesize
                     This work was supported by the Swiss National Science
                     Foundation (SNSF) through its National Centre of Competence in Research (NCCR) MARVEL and Grant No.
                     200021-179138. The National Centres of Competence in Research (NCCRs) are a funding scheme of the Swiss National Science Foundation
-
-                    \vspace{0.8em}
-                    \includegraphics[height=0.07\columnwidth]{../figures/psi_trimmed.png}
-                    \hfill
-                    \includegraphics[height=0.07\columnwidth]{../figures/marvel_trimmed.png}
-                    \hfill
-                    \includegraphics[height=0.07\columnwidth]{../figures/SNF_logo_standard_print_color_pos_e.eps}
                     \vspace{0.5em}
+
 
                 \end{block}
                 % \begin{beamercolorbox}[wd=\textwidth,sep=1em]{logos}
@@ -301,10 +350,11 @@
             \end{column}
         \end{columns}
 
-        \vspace{1.25em}
+        \vspace{1.4ex}
 
     \end{beamercolorbox}
 
+    \setbeamercolor{banner}{fg=white,bg=kgrey}
     \begin{beamercolorbox}[wd=\textwidth,sep=1em]{banner}
         \begin{center}
             \bf \large Go to {\ttfamily \bf \large koopmans-functionals.org} to find out more!
