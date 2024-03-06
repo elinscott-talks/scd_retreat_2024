@@ -45,7 +45,7 @@
 
 \definecolor{darkblue}{HTML}{315472}
 \setbeamercolor{frametitle}{bg=black, fg=white}
-\setbeamercolor{body}{fg=black, bg=white}
+\setbeamercolor{body}{fg=white, bg=white}
 \setbeamercolor*{author in head/foot}{bg=darkblue}
 \setbeamercolor*{logo in head/foot}{bg=darkblue,fg=white}
 \setbeamercolor*{title in head/foot}{bg=darkblue,fg=white}
@@ -53,8 +53,9 @@
 \setbeamercolor{title}{bg=darkblue}
 \setbeamercolor{footline}{bg=darkblue}
 \setbeamercolor{caption name}{fg=darkblue}
-\setbeamersize{text margin left=0.07cm,text margin right=0.07cm}
-\setbeamercolor{background canvas}{bg=seaborn_bg_grey_dark}
+\setbeamersize{text margin left=0.0cm,text margin right=0.0cm}
+\definecolor{grey_from_blender}{HTML}{b9b9c0}
+\setbeamercolor{background canvas}{bg=grey_from_blender}
 
 % New commands
 \newcommand{\ket}[1]{|#1\rangle}
@@ -64,93 +65,33 @@
 \newcommand{\nline}{\nonumber \\}
 \newcommand{\Trace}{\mathrm{Tr}}
 
-\setbeamertemplate{frametitle}
-{
-  \vspace{-1pt}
-  \begin{beamercolorbox}[wd=\paperwidth,ht=0.8cm]{frametitle}
-    \hspace{0.05em}
-    \begin{minipage}{0.85\textwidth}
-      \small \bf
-      Accurately predicting electron affinities with Koopmans spectral functionals
-
-      \tiny
-      Edward Linscott, Nicola Colonna, Riccardo De Gennaro, and Nicola Marzari
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.1\textwidth}
-    \includegraphics[height=0.55cm]{/home/elinscott/Pictures/epfl_logos/white_cropped.eps}
-    \end{minipage}
-    \hspace{0.2cm}
-    \vspace{0.125cm}
-  \end{beamercolorbox}%
-}
-\setbeamertemplate{title page}
-{
-}
+\setbeamertemplate{frametitle}{}
+\setbeamertemplate{title page}{}
 %\setbeamerfont{frametitle}{series=\bfseries}
 \setbeamertemplate{footline}{}
 
 \begin{document}
 
 \begin{frame}{x}
-  \hbox{
-    \begin{beamercolorbox}[wd=0.3\textwidth,ht=0.89\textheight,sep=0.1cm]{body}
-      \footnotesize \textbf{Theory}
+  \begin{columns}
+    \begin{column}{\paperheight}
+      \includegraphics[height=\paperheight]{../figures/black_box_filled_square.png}
+    \end{column}
+    \begin{column}{\dimexpr\paperwidth-\paperheight}
+      \vfill
+      \bf
+      \Large
+      \emph{Predicting band structures accurately and efficiently with a black box}
 
-      \vspace{1.4ex}
-
-      \centering
-
-      \includegraphics[width=0.2\columnwidth]{../figures/curvature_plot/fig_en_curve_koopmans_step1-crop.pdf}
-
-      %
-      \tiny The goal:
-
-      $\varepsilon_i = \braopket{\varphi_i}{H}{\varphi_i} = \partial E/\partial f_i$ independent of $f_i$
-
-      \vspace{2em}
-
-      The functional:
-      %
-      \begin{align*}
-         & E_{KC}[\rho,\{f_i\},\{\alpha_i\}] = \only<1>{\textcolor{seaborn_bright_red}}{E_{DFT}[\rho]} \nonumber \\
-         & + \sum_i \alpha_i\left(
-        \only<2>{\textcolor{seaborn_bright_red}}{- \int^{f_i}_{0} \varepsilon_i(f) df}
-        \only<3>{\textcolor{seaborn_bright_red}}{\, + f_i \int_0^1 \varepsilon_i(f) df}
-        \right)
-      \end{align*}
-
-      \textcolor{seaborn_bg_grey_dark}{Dabo \emph{et al}, Phys. Rev. B 82, 115121}
-
-      \textcolor{seaborn_bg_grey_dark}{Borghi \emph{et al}, Phys. Rev. B 90, 075135}
-
-      \textcolor{seaborn_bg_grey_dark}{Nguyen \emph{et al}, Phys. Rev. X 8, 021051}
-    \end{beamercolorbox}%
-    \hspace{0.01\textwidth}%
-    \vbox{
-
-      \begin{beamercolorbox}[wd=0.6775\textwidth,ht=0.52\textheight,sep=0.1cm]{body}
-        \footnotesize \textbf{Implementation}
-        \tiny
-      \end{beamercolorbox}%
-      \vspace{0.7ex}
-
-      \begin{beamercolorbox}[wd=0.6775\textwidth,ht=0.35\textheight,sep=0.1cm]{body}
-        \footnotesize \textbf{Results}
-        \vspace{0.2em}
-
-        % \begin{tabular}{c c}
-        %   \includegraphics[height=0.23\textheight]{../figures/gw100_ips.jpeg}
-        %    &
-        %   \includegraphics[height=0.23\textheight]{../figures/fig_gw100_ea_mae_mse-crop.pdf}
-        %   \\
-        %   \tiny \textcolor{seaborn_bg_grey_dark}{Colonna \emph{et al}, JCTC 2018, 14, 5, 2549–2557}
-        %    &
-        %   \tiny \textcolor{seaborn_bg_grey_dark}{Linscott \emph{et al}, in prep.}
-        % \end{tabular}
-      \end{beamercolorbox}
-    }%
-  }
+      \vspace{0.5em}
+      \normalsize
+      Edward Linscott
+      
+      \footnotesize
+      Laboratory for Materials Simulations
+      \vfill
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \end{document}

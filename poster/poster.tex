@@ -105,7 +105,7 @@
         \vfill
         \bf
         \huge
-        \emph{Predicting band structures accurately and efficiently with black-box calculations}
+        \emph{Predicting band structures accurately and efficiently with a black box}
 
         \vspace{0.5em}
         \large
@@ -204,15 +204,30 @@
 
                 \begin{block}{2. How do Koopmans functionals work?}
                     \nocite{Dabo2009,Dabo2010,Borghi2014,Colonna2018,Nguyen2018,Colonna2019,DeGennaro2022,Colonna2022,Linscott2023}
-                    Koopmans functionals are constructed to reproduce spectral properties (charged excitations) and total energies on the same footing, enforcing a generalised piecewise linearity condition.
-                    \vspace{0.125em}
+
+                    \vspace{0.5ex}
+
+                    \begin{columns}
+                        \begin{column}{0.53\columnwidth}
+                            Koopmans functionals are constructed to reproduce spectral properties (charged excitations) and total energies on the same footing, enforcing a generalised piecewise linearity condition.
+
+                            \vspace{1ex}
+                            As the results on the left show, this strategy is sufficient to obtain band structures and orbital energies as accurate as state-of-the-art GW, at a fraction of the computational cost.
+
+                        \end{column}
+                        \begin{column}{0.45\columnwidth}
+                            \begin{center}
+                                \includegraphics[width=\columnwidth]{../figures/curvature_plot/fig_en_curve_sl_annotated_zoom.pdf}
+                            \end{center}
+                        \end{column}
+                    \end{columns}
+
+                    \vspace{0.5ex}
                     \begin{equation*}
                         E_\mathrm{Koopmans} = E_\mathrm{DFT} + \sum_i \alpha_i \biggl( \underbrace{- \int_0^{f_i}\varepsilon_i(f) df}_{\substack{\text{removes the erroneous} \\ \text{curvature}}} \underbrace{+ f_i\int_0^1 \varepsilon_i(f) df}_{\substack{\text{restores the}\\ \text{correct linearity}}} \biggr)
                     \end{equation*}
-                    \vspace{0.125em}
 
-                    As the results on the left show, this strategy is sufficient to obtain band structures and orbital energies as accurate as state-of-the-art GW, at a fraction of the computational cost.
-
+                    \vspace{0.5ex}
                     \vspace{1ex}
                     However, there's no such thing as a free lunch: compared to DFT these calculations are require a few extra steps:
                     \begin{itemize}
