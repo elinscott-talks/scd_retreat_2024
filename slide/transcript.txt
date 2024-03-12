@@ -1,0 +1,9 @@
+In order to understand the properties of any material, obtaining the electronic band structure can be very informative. However, to this day it is challenging to calculate band structures with predictive accuracy.
+
+Over the past decade, we have developed Koopmans functionals, a special class of functionals that predict band structures and molecular orbital energies with comparable accuracy to state-of-the-art GW.
+
+However, these calculations can still be challenging to run. In my poster, I give an overview of the different techniques we are employing as we try to make Koopmans functional calculations truly black box.
+
+Once we achieve this, Koopmans functionals could serve as a useful tool for experimentalists as well as a reliable step in high-throughput workflows.
+
+Please come to my poster and I'd be happy to explain everything further.

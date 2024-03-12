@@ -99,10 +99,14 @@
     \vspace{-0.001\paperheight}
     \setbeamercolor{banner}{fg=white,bg=grey_from_blender}
     \hbox{%
-    \includegraphics[width=0.2\textwidth]{../figures/black_box_filled_square.png}%
-    \hspace{-0.005\textwidth}%
-    \begin{beamercolorbox}[wd=0.805\textwidth,ht=0.2\textwidth,sep=1em]{banner}
-        \vfill
+    \begin{beamercolorbox}[wd=0.35\textwidth,ht=0.4\textwidth,sep=0em]{banner}
+        \includegraphics[width=0.35\textwidth]{../figures/black_box_filled_square_wide_transparent_manually_cleaned_top_right.png}%
+
+        \vspace{0.045\textwidth}
+    \end{beamercolorbox}%
+    \setbeamercolor{banner}{fg=white,bg=grey_from_blender}%
+    \hspace{-0.145\textwidth}%
+    \begin{beamercolorbox}[wd=0.795\textwidth,ht=0.4\textwidth,sep=1em]{banner}
         \bf
         \huge
         \emph{Predicting band structures accurately and efficiently with a black box}
@@ -110,13 +114,14 @@
         \vspace{0.5em}
         \large
         Edward Linscott (Laboratory for Materials Simulations)
-        \vfill
+        
+        \vspace{0.21\textwidth}
     \end{beamercolorbox}
     }
 
     \vspace{-0.001\paperheight}
     \setbeamercolor{background}{fg=white,bg=grey_from_blender}
-    \begin{beamercolorbox}[ht=0.794\paperheight,wd=\textwidth]{background}
+    \begin{beamercolorbox}[ht=\dimexpr 0.794\paperheight-0.2\textwidth,wd=\textwidth]{background}
 
         \begin{columns}[t]
             \begin{column}{0.37\linewidth}
@@ -209,7 +214,7 @@
 
                     \begin{columns}
                         \begin{column}{0.53\columnwidth}
-                            Koopmans functionals are constructed to reproduce spectral properties (charged excitations) and total energies on the same footing, enforcing a generalised piecewise linearity condition.
+                            Koopmans functionals are constructed to reproduce spectral properties (charged excitations) accurately, by ensuring that eigenvalues match the corresponding total energy differences.
 
                             \vspace{1ex}
                             As the results on the left show, this strategy is sufficient to obtain band structures and orbital energies as accurate as state-of-the-art GW, at a fraction of the computational cost.
@@ -222,16 +227,15 @@
                         \end{column}
                     \end{columns}
 
-                    \vspace{0.5ex}
+                    \vspace{2.3ex}
                     \begin{equation*}
                         E_\mathrm{Koopmans} = E_\mathrm{DFT} + \sum_i \alpha_i \biggl( \underbrace{- \int_0^{f_i}\varepsilon_i(f) df}_{\substack{\text{removes the erroneous} \\ \text{curvature}}} \underbrace{+ f_i\int_0^1 \varepsilon_i(f) df}_{\substack{\text{restores the}\\ \text{correct linearity}}} \biggr)
                     \end{equation*}
 
-                    \vspace{0.5ex}
-                    \vspace{1ex}
-                    However, there's no such thing as a free lunch: compared to DFT these calculations are require a few extra steps:
+                    \vspace{2ex}
+                    Compared to DFT these calculations require a few extra steps:
                     \begin{itemize}
-                        \item obtaining a set of localized orbitals $\rightarrow$ the focus of this work
+                        \item obtaining a set of localised orbitals $\rightarrow$ the focus of this work
                         \item calculating screening parameters $\rightarrow$ implemented and automated in the \texttt{koopmans} code \textcolor{kgrey_light}{\citeauthoryear{Linscott2023}}
                     \end{itemize}
 
@@ -241,7 +245,7 @@
                 \vspace{1.5ex}
 
             \begin{block}{3. Localized orbitals via automated Wannierization}
-                In order to automate the Wannierisation, we...
+                In order to automate the otherwise very manual Wannierisation procedure, we...
 
                 \vspace{1ex}
                 \begin{columns}
@@ -265,7 +269,7 @@
                 \textcolor{kgrey_light}{\citeauthoryear{Qiao2023}}
                         
                     \end{column}
-                    \begin{column}{0.5\columnwidth}
+                    \begin{column}{0.525\columnwidth}
                 \textbf{(c) separate subspaces via parallel transport}
                 
                 \begin{center}
@@ -275,14 +279,16 @@
                 \textcolor{kgrey_light}{\citeauthoryear{Qiao2023a}}
                 \vspace{1ex}
 
-                \textbf{(d) extend the pseudoatomic orbital basis}
+                \textbf{(d) extend the pseudoatomic orbital basis where required}
 
                 \vspace{1ex}
                 \begin{center}
-                \includegraphics[width=0.6\columnwidth]{../paos/F_with_3s_cropped.png}
+                \includegraphics[width=0.4\columnwidth]{../paos/old_projs.png}
+                \raisebox{0.2\columnwidth}{\huge $\rightarrow$}
+                \includegraphics[width=0.4\columnwidth]{../paos/new_projs.png}
                 \end{center}
 
-                Requires a confining potential for higher states, which is parametrised via Bayesian optimisation
+                Solve the radial Schrödinger equation with an optimised confining potential
                         
                     \end{column}
                 \end{columns}
@@ -322,12 +328,13 @@
         \begin{columns}[t]
             \begin{column}{0.67\textwidth}
                 \begin{block}{References\vphantom{g}}
-                    \vspace{0.4em}
+                    \vspace{1ex}
                     \hspace{-2em}
                     \begin{minipage}{1.03\textwidth}
                         \AtNextBibliography{\tiny}
                         \printbibliography
                     \end{minipage}
+                    \vspace{0.75ex}
                 \end{block}
 
             \end{column}
@@ -365,10 +372,11 @@
             \end{column}
         \end{columns}
 
-        \vspace{1.4ex}
+        \vspace{1.7ex}
 
     \end{beamercolorbox}
 
+    \vspace{-0.03ex}
     \setbeamercolor{banner}{fg=white,bg=kgrey}
     \begin{beamercolorbox}[wd=\textwidth,sep=1em]{banner}
         \begin{center}
